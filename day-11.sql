@@ -115,5 +115,12 @@ SELECT MAKEDATE(2024,60)AS RESULT_DATE;
 SELECT MAKETIME(14,30,15)AS RESULT_TIME;
 
 
+select
+sysdate(),
+sleep(3),
+sysdate();
+
+
+
 
 
