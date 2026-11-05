@@ -1,0 +1,286 @@
+Enter password: ******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use assignments;
+Database changed
+mysql> show tables;
++-----------------------+
+| Tables_in_assignments |
++-----------------------+
+| employees             |
+| employees2            |
+| employees3            |
+| products              |
++-----------------------+
+4 rows in set (0.03 sec)
+
+mysql> CREATE TABLE StudentScores (
+    ->  id INT,
+    ->  name VARCHAR(100),
+    ->  subject VARCHAR(50),
+    ->  marks INT
+    ->  );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql>
+mysql>
+mysql> INSERT INTO StudentScores VALUES
+    ->  (1, 'Alice', 'Math', 95),
+    ->  (2, 'Bob', 'Math', 76),
+    ->  (3, 'Charlie', 'Math', 59),
+    ->  (4, 'Diana', 'Math', 88),
+    ->  (5, 'Eve', 'Math', 40),
+    ->  (6, 'Frank', 'Math', 95),
+    ->  (7, 'Grace', 'Science', 67),
+    ->  (8, 'Henry', 'Science', 82),
+    ->  (9, 'Ivy', 'English', 91),
+    ->  (10, 'Jack', 'English', 55),
+    ->  (11, 'Kevin', 'Math', 73),
+    ->  (12, 'Lily', 'Science', 48),
+    ->  (13, 'Mia', 'English', 100),
+    ->  (14, 'Noah', 'Math', 64),
+    ->  (15, 'Olivia', 'Science', 79);
+Query OK, 15 rows affected (0.04 sec)
+Records: 15  Duplicates: 0  Warnings: 0
+
+mysql> select * from studentscores;
++------+---------+---------+-------+
+| id   | name    | subject | marks |
++------+---------+---------+-------+
+|    1 | Alice   | Math    |    95 |
+|    2 | Bob     | Math    |    76 |
+|    3 | Charlie | Math    |    59 |
+|    4 | Diana   | Math    |    88 |
+|    5 | Eve     | Math    |    40 |
+|    6 | Frank   | Math    |    95 |
+|    7 | Grace   | Science |    67 |
+|    8 | Henry   | Science |    82 |
+|    9 | Ivy     | English |    91 |
+|   10 | Jack    | English |    55 |
+|   11 | Kevin   | Math    |    73 |
+|   12 | Lily    | Science |    48 |
+|   13 | Mia     | English |   100 |
+|   14 | Noah    | Math    |    64 |
+|   15 | Olivia  | Science |    79 |
++------+---------+---------+-------+
+15 rows in set (0.00 sec)
+
+mysql> select * from studentscores where marks <= 60;
++------+---------+---------+-------+
+| id   | name    | subject | marks |
++------+---------+---------+-------+
+|    3 | Charlie | Math    |    59 |
+|    5 | Eve     | Math    |    40 |
+|   10 | Jack    | English |    55 |
+|   12 | Lily    | Science |    48 |
++------+---------+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from studentscores where marks > 70;
++------+--------+---------+-------+
+| id   | name   | subject | marks |
++------+--------+---------+-------+
+|    1 | Alice  | Math    |    95 |
+|    2 | Bob    | Math    |    76 |
+|    4 | Diana  | Math    |    88 |
+|    6 | Frank  | Math    |    95 |
+|    8 | Henry  | Science |    82 |
+|    9 | Ivy    | English |    91 |
+|   11 | Kevin  | Math    |    73 |
+|   13 | Mia    | English |   100 |
+|   15 | Olivia | Science |    79 |
++------+--------+---------+-------+
+9 rows in set (0.00 sec)
+
+mysql> select * from studentscores where marks <= 75;
++------+---------+---------+-------+
+| id   | name    | subject | marks |
++------+---------+---------+-------+
+|    3 | Charlie | Math    |    59 |
+|    5 | Eve     | Math    |    40 |
+|    7 | Grace   | Science |    67 |
+|   10 | Jack    | English |    55 |
+|   11 | Kevin   | Math    |    73 |
+|   12 | Lily    | Science |    48 |
+|   14 | Noah    | Math    |    64 |
++------+---------+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select * from studentscores where marks = 100;
++------+------+---------+-------+
+| id   | name | subject | marks |
++------+------+---------+-------+
+|   13 | Mia  | English |   100 |
++------+------+---------+-------+
+1 row in set (0.00 sec)
+
+mysql> select * from studentscores where marks != 40;
++------+---------+---------+-------+
+| id   | name    | subject | marks |
++------+---------+---------+-------+
+|    1 | Alice   | Math    |    95 |
+|    2 | Bob     | Math    |    76 |
+|    3 | Charlie | Math    |    59 |
+|    4 | Diana   | Math    |    88 |
+|    6 | Frank   | Math    |    95 |
+|    7 | Grace   | Science |    67 |
+|    8 | Henry   | Science |    82 |
+|    9 | Ivy     | English |    91 |
+|   10 | Jack    | English |    55 |
+|   11 | Kevin   | Math    |    73 |
+|   12 | Lily    | Science |    48 |
+|   13 | Mia     | English |   100 |
+|   14 | Noah    | Math    |    64 |
+|   15 | Olivia  | Science |    79 |
++------+---------+---------+-------+
+14 rows in set (0.00 sec)
+
+mysql> select * from studentscores where marks >= 95;
++------+-------+---------+-------+
+| id   | name  | subject | marks |
++------+-------+---------+-------+
+|    1 | Alice | Math    |    95 |
+|    6 | Frank | Math    |    95 |
+|   13 | Mia   | English |   100 |
++------+-------+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from studentscores where marks >= 90;
++------+-------+---------+-------+
+| id   | name  | subject | marks |
++------+-------+---------+-------+
+|    1 | Alice | Math    |    95 |
+|    6 | Frank | Math    |    95 |
+|    9 | Ivy   | English |    91 |
+|   13 | Mia   | English |   100 |
++------+-------+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from studentscores where marks < 65;
++------+---------+---------+-------+
+| id   | name    | subject | marks |
++------+---------+---------+-------+
+|    3 | Charlie | Math    |    59 |
+|    5 | Eve     | Math    |    40 |
+|   10 | Jack    | English |    55 |
+|   12 | Lily    | Science |    48 |
+|   14 | Noah    | Math    |    64 |
++------+---------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from studentscores;
++------+---------+---------+-------+
+| id   | name    | subject | marks |
++------+---------+---------+-------+
+|    1 | Alice   | Math    |    95 |
+|    2 | Bob     | Math    |    76 |
+|    3 | Charlie | Math    |    59 |
+|    4 | Diana   | Math    |    88 |
+|    5 | Eve     | Math    |    40 |
+|    6 | Frank   | Math    |    95 |
+|    7 | Grace   | Science |    67 |
+|    8 | Henry   | Science |    82 |
+|    9 | Ivy     | English |    91 |
+|   10 | Jack    | English |    55 |
+|   11 | Kevin   | Math    |    73 |
+|   12 | Lily    | Science |    48 |
+|   13 | Mia     | English |   100 |
+|   14 | Noah    | Math    |    64 |
+|   15 | Olivia  | Science |    79 |
++------+---------+---------+-------+
+15 rows in set (0.00 sec)
+
+mysql> update studentscores set marks = 100 where marks = 95;
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> update studentscores set marks = marks +15 where marks < 60;
+Query OK, 4 rows affected (0.01 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+mysql> update studentscores set marks = marks +5 where marks > 75;
+Query OK, 8 rows affected (0.01 sec)
+Rows matched: 8  Changed: 8  Warnings: 0
+
+mysql> update studentscores set marks = marks -3 where marks > 95;
+Query OK, 4 rows affected (0.01 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+mysql> update studentscores set marks = 75 where marks < 50;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> update studentscores set marks = marks +8 where marks = 64;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update studentscores set marks = marks -5 where marks = 100;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from studentscores;
++------+---------+---------+-------+
+| id   | name    | subject | marks |
++------+---------+---------+-------+
+|    1 | Alice   | Math    |   102 |
+|    2 | Bob     | Math    |    81 |
+|    3 | Charlie | Math    |    74 |
+|    4 | Diana   | Math    |    93 |
+|    5 | Eve     | Math    |    55 |
+|    6 | Frank   | Math    |   102 |
+|    7 | Grace   | Science |    67 |
+|    8 | Henry   | Science |    87 |
+|    9 | Ivy     | English |    93 |
+|   10 | Jack    | English |    70 |
+|   11 | Kevin   | Math    |    73 |
+|   12 | Lily    | Science |    63 |
+|   13 | Mia     | English |   102 |
+|   14 | Noah    | Math    |    72 |
+|   15 | Olivia  | Science |    84 |
++------+---------+---------+-------+
+15 rows in set (0.00 sec)
+
+mysql> delete from studentscores where marks = 76;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> delete from studentscores where marks = 100;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> delete from studentscores where marks < 65;
+Query OK, 2 rows affected (0.01 sec)
+
+mysql> delete from studentscores where marks >= 90;
+Query OK, 5 rows affected (0.01 sec)
+
+mysql> delete from studentscores where marks = 73;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> delete from studentscores where marks = 48;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> delete from studentscores where marks > 70 and marks<80;
+Query OK, 2 rows affected (0.01 sec)
+
+mysql> select * from studentscores;
++------+--------+---------+-------+
+| id   | name   | subject | marks |
++------+--------+---------+-------+
+|    2 | Bob    | Math    |    81 |
+|    7 | Grace  | Science |    67 |
+|    8 | Henry  | Science |    87 |
+|   10 | Jack   | English |    70 |
+|   15 | Olivia | Science |    84 |
++------+--------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql>

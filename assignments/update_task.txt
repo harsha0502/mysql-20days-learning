@@ -1,0 +1,163 @@
+Enter password: ******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 25
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use assignments;
+Database changed
+mysql> select*from employees;
++--------+--------------+------------+------------+----------+--------------+-----------+
+| emp_id | emp_name     | department | job_role   | salary   | joining_date | city      |
++--------+--------------+------------+------------+----------+--------------+-----------+
+|    101 | Ravi Kumar   | IT         | Developer  | 45000.00 | 2023-01-15   | Vizag     |
+|    102 | Priya Sharma | HR         | HR Manager | 55000.00 | 2022-06-20   | Hyderabad |
+|    103 | Kiran Reddy  | IT         | Tester     | 40000.00 | 2023-03-10   | Vizag     |
+|    104 | Sneha Rao    | Finance    | Accountant | 48000.00 | 2021-11-25   | Chennai   |
+|    105 | Arun Kumar   | IT         | Developer  | 60000.00 | 2020-08-18   | Bangalore |
+|    106 | Divya Reddy  | HR         | Recruiter  | 35000.00 | 2024-01-05   | Vizag     |
+|    107 | Suresh Babu  | Sales      | Executive  | 42000.00 | 2022-09-12   | Hyderabad |
+|    108 | Anjali Devi  | IT         | Developer  | 70000.00 | 2019-05-30   | Chennai   |
+|    109 | Mahesh Kumar | Sales      | Manager    | 65000.00 | 2020-02-14   | Bangalore |
+|    110 | Lakshmi Rao  | Finance    | Analyst    | 52000.00 | 2023-07-22   | Hyderabad |
++--------+--------------+------------+------------+----------+--------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> update employees set salary = 50000 where emp_name = 'Ravi Kumar';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employees set salary = salary*1.1;
+Query OK, 10 rows affected (0.01 sec)
+Rows matched: 10  Changed: 10  Warnings: 0
+
+mysql> update employees set city = 'Vizag' where emp_name = 'Priya Sharma';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employees set job_role = 'Senior Tester' where emp_name = 'Kiran Reddy';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> delete from employees2 where salary>0;
+Query OK, 10 rows affected (0.01 sec)
+
+mysql> select* from employees2;
+Empty set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select* from employees2;
+Empty set (0.00 sec)
+
+mysql> select* from employees;
++--------+--------------+------------+---------------+----------+--------------+-----------+
+| emp_id | emp_name     | department | job_role      | salary   | joining_date | city      |
++--------+--------------+------------+---------------+----------+--------------+-----------+
+|    101 | Ravi Kumar   | IT         | Developer     | 55000.00 | 2023-01-15   | Vizag     |
+|    102 | Priya Sharma | HR         | HR Manager    | 60500.00 | 2022-06-20   | Vizag     |
+|    103 | Kiran Reddy  | IT         | Senior Tester | 44000.00 | 2023-03-10   | Vizag     |
+|    104 | Sneha Rao    | Finance    | Accountant    | 52800.00 | 2021-11-25   | Chennai   |
+|    105 | Arun Kumar   | IT         | Developer     | 66000.00 | 2020-08-18   | Bangalore |
+|    106 | Divya Reddy  | HR         | Recruiter     | 38500.00 | 2024-01-05   | Vizag     |
+|    107 | Suresh Babu  | Sales      | Executive     | 46200.00 | 2022-09-12   | Hyderabad |
+|    108 | Anjali Devi  | IT         | Developer     | 77000.00 | 2019-05-30   | Chennai   |
+|    109 | Mahesh Kumar | Sales      | Manager       | 71500.00 | 2020-02-14   | Bangalore |
+|    110 | Lakshmi Rao  | Finance    | Analyst       | 57200.00 | 2023-07-22   | Hyderabad |
++--------+--------------+------------+---------------+----------+--------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select* from employees3;
++--------+--------------+------------+------------+----------+--------------+-----------+
+| emp_id | emp_name     | department | job_role   | salary   | joining_date | city      |
++--------+--------------+------------+------------+----------+--------------+-----------+
+|    101 | Ravi Kumar   | IT         | Developer  | 45000.00 | 2023-01-15   | Vizag     |
+|    102 | Priya Sharma | HR         | HR Manager | 55000.00 | 2022-06-20   | Hyderabad |
+|    103 | Kiran Reddy  | IT         | Tester     | 40000.00 | 2023-03-10   | Vizag     |
+|    104 | Sneha Rao    | Finance    | Accountant | 48000.00 | 2021-11-25   | Chennai   |
+|    105 | Arun Kumar   | IT         | Developer  | 60000.00 | 2020-08-18   | Bangalore |
+|    106 | Divya Reddy  | HR         | Recruiter  | 35000.00 | 2024-01-05   | Vizag     |
+|    107 | Suresh Babu  | Sales      | Executive  | 42000.00 | 2022-09-12   | Hyderabad |
+|    108 | Anjali Devi  | IT         | Developer  | 70000.00 | 2019-05-30   | Chennai   |
+|    109 | Mahesh Kumar | Sales      | Manager    | 65000.00 | 2020-02-14   | Bangalore |
+|    110 | Lakshmi Rao  | Finance    | Analyst    | 52000.00 | 2023-07-22   | Hyderabad |
++--------+--------------+------------+------------+----------+--------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> insert into employees2 select * from employees3;
+Query OK, 10 rows affected (0.01 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> update employees set salary = salary +5000;
+Query OK, 10 rows affected (0.01 sec)
+Rows matched: 10  Changed: 10  Warnings: 0
+
+mysql> update employees set city = 'Hyderabad' where city = 'Vizag';
+Query OK, 4 rows affected (0.01 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+mysql> select * from employees;
++--------+--------------+------------+---------------+----------+--------------+-----------+
+| emp_id | emp_name     | department | job_role      | salary   | joining_date | city      |
++--------+--------------+------------+---------------+----------+--------------+-----------+
+|    101 | Ravi Kumar   | IT         | Developer     | 60000.00 | 2023-01-15   | Hyderabad |
+|    102 | Priya Sharma | HR         | HR Manager    | 65500.00 | 2022-06-20   | Hyderabad |
+|    103 | Kiran Reddy  | IT         | Senior Tester | 49000.00 | 2023-03-10   | Hyderabad |
+|    104 | Sneha Rao    | Finance    | Accountant    | 57800.00 | 2021-11-25   | Chennai   |
+|    105 | Arun Kumar   | IT         | Developer     | 71000.00 | 2020-08-18   | Bangalore |
+|    106 | Divya Reddy  | HR         | Recruiter     | 43500.00 | 2024-01-05   | Hyderabad |
+|    107 | Suresh Babu  | Sales      | Executive     | 51200.00 | 2022-09-12   | Hyderabad |
+|    108 | Anjali Devi  | IT         | Developer     | 82000.00 | 2019-05-30   | Chennai   |
+|    109 | Mahesh Kumar | Sales      | Manager       | 76500.00 | 2020-02-14   | Bangalore |
+|    110 | Lakshmi Rao  | Finance    | Analyst       | 62200.00 | 2023-07-22   | Hyderabad |
++--------+--------------+------------+---------------+----------+--------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> update employees set department = 'Development' where emp_name = 'Arun Kumar';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employees set salary  = salary*1.15 where salary < 45000;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employees set job_role = 'Senior Developer' where emp_name = 'Anjali Devi';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employees set city = 'Bangalore' where department = 'Finance';
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from employees;
++--------+--------------+-------------+------------------+----------+--------------+-----------+
+| emp_id | emp_name     | department  | job_role         | salary   | joining_date | city      |
++--------+--------------+-------------+------------------+----------+--------------+-----------+
+|    101 | Ravi Kumar   | IT          | Developer        | 60000.00 | 2023-01-15   | Hyderabad |
+|    102 | Priya Sharma | HR          | HR Manager       | 65500.00 | 2022-06-20   | Hyderabad |
+|    103 | Kiran Reddy  | IT          | Senior Tester    | 49000.00 | 2023-03-10   | Hyderabad |
+|    104 | Sneha Rao    | Finance     | Accountant       | 57800.00 | 2021-11-25   | Bangalore |
+|    105 | Arun Kumar   | Development | Developer        | 71000.00 | 2020-08-18   | Bangalore |
+|    106 | Divya Reddy  | HR          | Recruiter        | 50025.00 | 2024-01-05   | Hyderabad |
+|    107 | Suresh Babu  | Sales       | Executive        | 51200.00 | 2022-09-12   | Hyderabad |
+|    108 | Anjali Devi  | IT          | Senior Developer | 82000.00 | 2019-05-30   | Chennai   |
+|    109 | Mahesh Kumar | Sales       | Manager          | 76500.00 | 2020-02-14   | Bangalore |
+|    110 | Lakshmi Rao  | Finance     | Analyst          | 62200.00 | 2023-07-22   | Bangalore |
++--------+--------------+-------------+------------------+----------+--------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql>

@@ -1,0 +1,197 @@
+Enter password: ******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 14
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use assignments;
+Database changed
+mysql> show tables;
++-----------------------+
+| Tables_in_assignments |
++-----------------------+
+| emp                   |
+| employees             |
+| employees2            |
+| employees3            |
+| orders                |
+| products              |
+| studentscores         |
++-----------------------+
+7 rows in set (0.01 sec)
+
+mysql> drop table employees;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> show tables;
++-----------------------+
+| Tables_in_assignments |
++-----------------------+
+| emp                   |
+| employees2            |
+| employees3            |
+| orders                |
+| products              |
+| studentscores         |
++-----------------------+
+6 rows in set (0.00 sec)
+
+mysql> CREATE TABLE employees (
+    ->     emp_id INT PRIMARY KEY,
+    ->     emp_name VARCHAR(50),
+    ->     department VARCHAR(30),
+    ->     salary DECIMAL(10,2),
+    ->     experience INT,
+    ->     age INT
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql>
+mysql> INSERT INTO employees VALUES
+    -> (101,'Ravi','IT',65000,5,28),
+    -> (102,'Priya','HR',45000,2,24),
+    -> (103,'Amit','Finance',75000,8,35),
+    -> (104,'Sneha','IT',55000,3,27),
+    -> (105,'Rahul','Sales',40000,1,22),
+    -> (106,'Kiran','Finance',90000,12,40),
+    -> (107,'Anjali','HR',52000,4,29),
+    -> (108,'Suresh','Sales',68000,7,33);
+Query OK, 8 rows affected (0.01 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> select * from employees;
++--------+----------+------------+----------+------------+------+
+| emp_id | emp_name | department | salary   | experience | age  |
++--------+----------+------------+----------+------------+------+
+|    101 | Ravi     | IT         | 65000.00 |          5 |   28 |
+|    102 | Priya    | HR         | 45000.00 |          2 |   24 |
+|    103 | Amit     | Finance    | 75000.00 |          8 |   35 |
+|    104 | Sneha    | IT         | 55000.00 |          3 |   27 |
+|    105 | Rahul    | Sales      | 40000.00 |          1 |   22 |
+|    106 | Kiran    | Finance    | 90000.00 |         12 |   40 |
+|    107 | Anjali   | HR         | 52000.00 |          4 |   29 |
+|    108 | Suresh   | Sales      | 68000.00 |          7 |   33 |
++--------+----------+------------+----------+------------+------+
+8 rows in set (0.00 sec)
+
+mysql> select emp_name,
+    -> department,
+    -> salary,
+    -> case
+    -> when department = 'it' then salary*0.20
+    -> when department = 'finance' then salary*0.15
+    -> when department = 'hr' then salary*0.10
+    -> else salary * 0.05
+    -> end as bonus
+    -> from employees;
++----------+------------+----------+------------+
+| emp_name | department | salary   | bonus      |
++----------+------------+----------+------------+
+| Ravi     | IT         | 65000.00 | 13000.0000 |
+| Priya    | HR         | 45000.00 |  4500.0000 |
+| Amit     | Finance    | 75000.00 | 11250.0000 |
+| Sneha    | IT         | 55000.00 | 11000.0000 |
+| Rahul    | Sales      | 40000.00 |  2000.0000 |
+| Kiran    | Finance    | 90000.00 | 13500.0000 |
+| Anjali   | HR         | 52000.00 |  5200.0000 |
+| Suresh   | Sales      | 68000.00 |  3400.0000 |
++----------+------------+----------+------------+
+8 rows in set (0.00 sec)
+
+mysql> select emp_name,
+    -> age,
+    -> case
+    -> when age > 18 then 'eligible'
+    -> else 'not eligible'
+    -> end as voting_status
+    -> from employees;
++----------+------+---------------+
+| emp_name | age  | voting_status |
++----------+------+---------------+
+| Ravi     |   28 | eligible      |
+| Priya    |   24 | eligible      |
+| Amit     |   35 | eligible      |
+| Sneha    |   27 | eligible      |
+| Rahul    |   22 | eligible      |
+| Kiran    |   40 | eligible      |
+| Anjali   |   29 | eligible      |
+| Suresh   |   33 | eligible      |
++----------+------+---------------+
+8 rows in set (0.00 sec)
+
+mysql> select emp_name,
+    -> salary,
+    -> case
+    -> when salary >= 80000 then 'Grade A'
+    -> when salary >= 60000 then 'Grade B'
+    -> when salary >= 50000 then 'Grade C'
+    -> else 'Grade D'
+    -> end as Grade
+    -> from employees;
++----------+----------+---------+
+| emp_name | salary   | Grade   |
++----------+----------+---------+
+| Ravi     | 65000.00 | Grade B |
+| Priya    | 45000.00 | Grade D |
+| Amit     | 75000.00 | Grade B |
+| Sneha    | 55000.00 | Grade C |
+| Rahul    | 40000.00 | Grade D |
+| Kiran    | 90000.00 | Grade A |
+| Anjali   | 52000.00 | Grade C |
+| Suresh   | 68000.00 | Grade B |
++----------+----------+---------+
+8 rows in set (0.01 sec)
+
+mysql> select *
+    -> from employees
+    -> order by
+    -> case
+    -> when department = 'IT' then 1
+    -> else 2
+    -> end;
++--------+----------+------------+----------+------------+------+
+| emp_id | emp_name | department | salary   | experience | age  |
++--------+----------+------------+----------+------------+------+
+|    101 | Ravi     | IT         | 65000.00 |          5 |   28 |
+|    104 | Sneha    | IT         | 55000.00 |          3 |   27 |
+|    102 | Priya    | HR         | 45000.00 |          2 |   24 |
+|    103 | Amit     | Finance    | 75000.00 |          8 |   35 |
+|    105 | Rahul    | Sales      | 40000.00 |          1 |   22 |
+|    106 | Kiran    | Finance    | 90000.00 |         12 |   40 |
+|    107 | Anjali   | HR         | 52000.00 |          4 |   29 |
+|    108 | Suresh   | Sales      | 68000.00 |          7 |   33 |
++--------+----------+------------+----------+------------+------+
+8 rows in set (0.01 sec)
+
+mysql> update
+    -> employees
+    -> set salary =
+    -> case
+    -> when experience >= 10 then salary +10000
+    -> when expereince >= 5 then salary + 5000
+    -> else salary +2000
+    -> end;
+ERROR 1054 (42S22): Unknown column 'expereince' in 'field list'
+mysql> select
+    -> sum(
+    -> case
+    -> when department = 'it' then salary
+    -> else 0
+    -> end
+    -> ) as total_it_salary
+    -> from employees;
++-----------------+
+| total_it_salary |
++-----------------+
+|       120000.00 |
++-----------------+
+1 row in set (0.01 sec)
+
+mysql>

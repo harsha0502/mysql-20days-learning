@@ -1,0 +1,185 @@
+Enter password: ******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use assignments;
+Database changed
+mysql> show tables;
++-----------------------+
+| Tables_in_assignments |
++-----------------------+
+| employees             |
+| employees2            |
+| employees3            |
+| products              |
+| studentscores         |
++-----------------------+
+5 rows in set (0.05 sec)
+
+mysql> CREATE TABLE Orders (
+    ->  id INT,
+    ->  customer_name VARCHAR(100),
+    ->  order_date DATE,
+    ->  total_amount DECIMAL(10,2)
+    ->  );
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> INSERT INTO Orders VALUES
+    ->  (1, 'Alice', '2024-03-01', 1500.00),
+    ->  (2, 'Bob', '2024-03-05', 450.00),
+    ->  (3, 'Charlie', '2024-03-10', 2500.00),
+    ->  (4, 'Diana', '2024-03-15', 800.00),
+    ->  (5, 'Eve', '2024-03-20', 1200.00),
+    ->  (6, 'Frank', '2024-03-25', 3000.00),
+    ->  (7, 'Grace', '2024-04-02', 1800.00),
+    ->  (8, 'Henry', '2024-04-08', 950.00),
+    ->  (9, 'Ivy', '2024-04-12', 2750.00),
+    ->  (10, 'Jack', '2024-04-18', 650.00),
+    ->  (11, 'Kevin', '2024-04-22', 4200.00),
+    ->  (12, 'Lily', '2024-05-01', 1350.00),
+    ->  (13, 'Michael', '2024-05-08', 5000.00),
+    ->  (14, 'Nancy', '2024-05-15', 2250.00),
+    ->  (15, 'Oliver', '2024-05-25', 900.00);
+Query OK, 15 rows affected (0.02 sec)
+Records: 15  Duplicates: 0  Warnings: 0
+
+mysql> select * from orders;
++------+---------------+------------+--------------+
+| id   | customer_name | order_date | total_amount |
++------+---------------+------------+--------------+
+|    1 | Alice         | 2024-03-01 |      1500.00 |
+|    2 | Bob           | 2024-03-05 |       450.00 |
+|    3 | Charlie       | 2024-03-10 |      2500.00 |
+|    4 | Diana         | 2024-03-15 |       800.00 |
+|    5 | Eve           | 2024-03-20 |      1200.00 |
+|    6 | Frank         | 2024-03-25 |      3000.00 |
+|    7 | Grace         | 2024-04-02 |      1800.00 |
+|    8 | Henry         | 2024-04-08 |       950.00 |
+|    9 | Ivy           | 2024-04-12 |      2750.00 |
+|   10 | Jack          | 2024-04-18 |       650.00 |
+|   11 | Kevin         | 2024-04-22 |      4200.00 |
+|   12 | Lily          | 2024-05-01 |      1350.00 |
+|   13 | Michael       | 2024-05-08 |      5000.00 |
+|   14 | Nancy         | 2024-05-15 |      2250.00 |
+|   15 | Oliver        | 2024-05-25 |       900.00 |
++------+---------------+------------+--------------+
+15 rows in set (0.01 sec)
+
+mysql> select customer_name from orders where total_amount between 2000 and 5000;
++---------------+
+| customer_name |
++---------------+
+| Charlie       |
+| Frank         |
+| Ivy           |
+| Kevin         |
+| Michael       |
+| Nancy         |
++---------------+
+6 rows in set (0.01 sec)
+
+mysql> select customer_name from orders where order_date between '2024-03-15' and '2024-04-15';
++---------------+
+| customer_name |
++---------------+
+| Diana         |
+| Eve           |
+| Frank         |
+| Grace         |
+| Henry         |
+| Ivy           |
++---------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from orders where total_amount between 800 and 1000;
++------+---------------+------------+--------------+
+| id   | customer_name | order_date | total_amount |
++------+---------------+------------+--------------+
+|    4 | Diana         | 2024-03-15 |       800.00 |
+|    8 | Henry         | 2024-04-08 |       950.00 |
+|   15 | Oliver        | 2024-05-25 |       900.00 |
++------+---------------+------------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from orders where order_date between '2024-04-10' and '2024-05-10';
++------+---------------+------------+--------------+
+| id   | customer_name | order_date | total_amount |
++------+---------------+------------+--------------+
+|    9 | Ivy           | 2024-04-12 |      2750.00 |
+|   10 | Jack          | 2024-04-18 |       650.00 |
+|   11 | Kevin         | 2024-04-22 |      4200.00 |
+|   12 | Lily          | 2024-05-01 |      1350.00 |
+|   13 | Michael       | 2024-05-08 |      5000.00 |
++------+---------------+------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from orders where total_amount between 2500 and 5000;
++------+---------------+------------+--------------+
+| id   | customer_name | order_date | total_amount |
++------+---------------+------------+--------------+
+|    3 | Charlie       | 2024-03-10 |      2500.00 |
+|    6 | Frank         | 2024-03-25 |      3000.00 |
+|    9 | Ivy           | 2024-04-12 |      2750.00 |
+|   11 | Kevin         | 2024-04-22 |      4200.00 |
+|   13 | Michael       | 2024-05-08 |      5000.00 |
++------+---------------+------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from orders where total_amount between 5000 and 2500;
+Empty set (0.00 sec)
+
+mysql> update orders set total_amount = total_amount + 250 where order_date between '2024-04-20' and '2024-05-10';
+Query OK, 3 rows affected (0.01 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> update orders set total_amount = total_amount - 100 where order_date between '2024-03-15' and '2024-03-31';
+Query OK, 3 rows affected (0.01 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> update orders set total_amount = total_amount + 750 where total_amount between 800 and 1500;
+Query OK, 4 rows affected (0.01 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+mysql> update orders set total_amount = total_amount + 500 where total_amount between 3000 and 5000;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update orders set total_amount = total_amount + 100 where order_date between '2024-03-01' and '2024-05-31';
+Query OK, 15 rows affected (0.01 sec)
+Rows matched: 15  Changed: 15  Warnings: 0
+
+mysql> delete from orders where order_amount between 1000 and 2000;
+ERROR 1054 (42S22): Unknown column 'order_amount' in 'where clause'
+mysql> delete from orders where total_amount between 1000 and 2000;
+Query OK, 5 rows affected (0.01 sec)
+
+mysql> delete from orders where order_date between '2024-03-01' and '2024-03-05';
+Query OK, 2 rows affected (0.01 sec)
+
+mysql> delete from orders where order_date between '2024-04-18' and '2024-05-08';
+Query OK, 3 rows affected (0.01 sec)
+
+mysql> delete from orders where total_amount between 1800 and 3000;
+Query OK, 4 rows affected (0.01 sec)
+
+mysql> delete from orders where order_date between '2024-03-25' and '2024-04-08';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from orders;
++------+---------------+------------+--------------+
+| id   | customer_name | order_date | total_amount |
++------+---------------+------------+--------------+
+|    4 | Diana         | 2024-03-15 |       800.00 |
++------+---------------+------------+--------------+
+1 row in set (0.00 sec)
+
+mysql>

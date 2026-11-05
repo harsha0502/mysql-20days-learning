@@ -1,0 +1,281 @@
+Enter password: ******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use assignments;
+Database changed
+mysql> show tables;
++-----------------------+
+| Tables_in_assignments |
++-----------------------+
+| employees             |
+| employees2            |
+| employees3            |
++-----------------------+
+3 rows in set (0.10 sec)
+
+mysql> CREATE TABLE Products (
+    ->  id INT,
+    ->  name VARCHAR(100),
+    ->  price DECIMAL(10,2),
+    ->  qty INT
+    ->  );
+Query OK, 0 rows affected (0.08 sec)
+
+mysql>
+mysql>
+mysql> INSERT INTO Products VALUES
+    ->  (1, 'Pen', 10.00, 100),
+    ->  (2, 'Notebook', 25.00, 50),
+    ->  (3, 'Pencil', 5.00, 200),
+    ->  (4, 'Eraser', 3.00, 300),
+    ->  (5, 'Marker', 15.00, 80),
+    ->  (6, 'Scale', 20.00, 150),
+    ->  (7, 'Sharpener', 8.00, 120),
+    ->  (8, 'Geometry Box', 120.00, 40),
+    ->  (9, 'Sketch Pen', 60.00, 75),
+    ->  (10, 'Crayons', 90.00, 55);
+Query OK, 10 rows affected (0.05 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> select name, price, price + 20 as price_plus_20 from products;
++--------------+--------+---------------+
+| name         | price  | price_plus_20 |
++--------------+--------+---------------+
+| Pen          |  10.00 |         30.00 |
+| Notebook     |  25.00 |         45.00 |
+| Pencil       |   5.00 |         25.00 |
+| Eraser       |   3.00 |         23.00 |
+| Marker       |  15.00 |         35.00 |
+| Scale        |  20.00 |         40.00 |
+| Sharpener    |   8.00 |         28.00 |
+| Geometry Box | 120.00 |        140.00 |
+| Sketch Pen   |  60.00 |         80.00 |
+| Crayons      |  90.00 |        110.00 |
++--------------+--------+---------------+
+10 rows in set (0.03 sec)
+
+mysql> select name, price, price/2 as half_price from products;
++--------------+--------+------------+
+| name         | price  | half_price |
++--------------+--------+------------+
+| Pen          |  10.00 |   5.000000 |
+| Notebook     |  25.00 |  12.500000 |
+| Pencil       |   5.00 |   2.500000 |
+| Eraser       |   3.00 |   1.500000 |
+| Marker       |  15.00 |   7.500000 |
+| Scale        |  20.00 |  10.000000 |
+| Sharpener    |   8.00 |   4.000000 |
+| Geometry Box | 120.00 |  60.000000 |
+| Sketch Pen   |  60.00 |  30.000000 |
+| Crayons      |  90.00 |  45.000000 |
++--------------+--------+------------+
+10 rows in set (0.00 sec)
+
+mysql> select name, qty, qty*2 as double_quantity from products;
++--------------+------+-----------------+
+| name         | qty  | double_quantity |
++--------------+------+-----------------+
+| Pen          |  100 |             200 |
+| Notebook     |   50 |             100 |
+| Pencil       |  200 |             400 |
+| Eraser       |  300 |             600 |
+| Marker       |   80 |             160 |
+| Scale        |  150 |             300 |
+| Sharpener    |  120 |             240 |
+| Geometry Box |   40 |              80 |
+| Sketch Pen   |   75 |             150 |
+| Crayons      |   55 |             110 |
++--------------+------+-----------------+
+10 rows in set (0.00 sec)
+
+mysql> select name, qty, qty-10 as after_selling_quantity from products;
++--------------+------+------------------------+
+| name         | qty  | after_selling_quantity |
++--------------+------+------------------------+
+| Pen          |  100 |                     90 |
+| Notebook     |   50 |                     40 |
+| Pencil       |  200 |                    190 |
+| Eraser       |  300 |                    290 |
+| Marker       |   80 |                     70 |
+| Scale        |  150 |                    140 |
+| Sharpener    |  120 |                    110 |
+| Geometry Box |   40 |                     30 |
+| Sketch Pen   |   75 |                     65 |
+| Crayons      |   55 |                     45 |
++--------------+------+------------------------+
+10 rows in set (0.03 sec)
+
+mysql> select name, price, price%5 = 0 as divide_equal_among_5 from products;
++--------------+--------+----------------------+
+| name         | price  | divide_equal_among_5 |
++--------------+--------+----------------------+
+| Pen          |  10.00 |                    1 |
+| Notebook     |  25.00 |                    1 |
+| Pencil       |   5.00 |                    1 |
+| Eraser       |   3.00 |                    0 |
+| Marker       |  15.00 |                    1 |
+| Scale        |  20.00 |                    1 |
+| Sharpener    |   8.00 |                    0 |
+| Geometry Box | 120.00 |                    1 |
+| Sketch Pen   |  60.00 |                    1 |
+| Crayons      |  90.00 |                    1 |
++--------------+--------+----------------------+
+10 rows in set (0.00 sec)
+
+mysql> select name, price, price%2 = 0 as even_price from products;
++--------------+--------+------------+
+| name         | price  | even_price |
++--------------+--------+------------+
+| Pen          |  10.00 |          1 |
+| Notebook     |  25.00 |          0 |
+| Pencil       |   5.00 |          0 |
+| Eraser       |   3.00 |          0 |
+| Marker       |  15.00 |          0 |
+| Scale        |  20.00 |          1 |
+| Sharpener    |   8.00 |          1 |
+| Geometry Box | 120.00 |          1 |
+| Sketch Pen   |  60.00 |          1 |
+| Crayons      |  90.00 |          1 |
++--------------+--------+------------+
+10 rows in set (0.00 sec)
+
+mysql> select name, qty, qty%5 = 0 as qty_divisible_by_5 from products;
++--------------+------+--------------------+
+| name         | qty  | qty_divisible_by_5 |
++--------------+------+--------------------+
+| Pen          |  100 |                  1 |
+| Notebook     |   50 |                  1 |
+| Pencil       |  200 |                  1 |
+| Eraser       |  300 |                  1 |
+| Marker       |   80 |                  1 |
+| Scale        |  150 |                  1 |
+| Sharpener    |  120 |                  1 |
+| Geometry Box |   40 |                  1 |
+| Sketch Pen   |   75 |                  1 |
+| Crayons      |   55 |                  1 |
++--------------+------+--------------------+
+10 rows in set (0.00 sec)
+
+mysql> select name, price, price*0.9 as discounted_price from products;
++--------------+--------+------------------+
+| name         | price  | discounted_price |
++--------------+--------+------------------+
+| Pen          |  10.00 |            9.000 |
+| Notebook     |  25.00 |           22.500 |
+| Pencil       |   5.00 |            4.500 |
+| Eraser       |   3.00 |            2.700 |
+| Marker       |  15.00 |           13.500 |
+| Scale        |  20.00 |           18.000 |
+| Sharpener    |   8.00 |            7.200 |
+| Geometry Box | 120.00 |          108.000 |
+| Sketch Pen   |  60.00 |           54.000 |
+| Crayons      |  90.00 |           81.000 |
++--------------+--------+------------------+
+10 rows in set (0.03 sec)
+
+mysql> select name, price, (price+15)*1.18 as gst_plus_15_price from products;
++--------------+--------+-------------------+
+| name         | price  | gst_plus_15_price |
++--------------+--------+-------------------+
+| Pen          |  10.00 |           29.5000 |
+| Notebook     |  25.00 |           47.2000 |
+| Pencil       |   5.00 |           23.6000 |
+| Eraser       |   3.00 |           21.2400 |
+| Marker       |  15.00 |           35.4000 |
+| Scale        |  20.00 |           41.3000 |
+| Sharpener    |   8.00 |           27.1400 |
+| Geometry Box | 120.00 |          159.3000 |
+| Sketch Pen   |  60.00 |           88.5000 |
+| Crayons      |  90.00 |          123.9000 |
++--------------+--------+-------------------+
+10 rows in set (0.00 sec)
+
+mysql> select name, qty, qty/2 as half_quantity from products;
++--------------+------+---------------+
+| name         | qty  | half_quantity |
++--------------+------+---------------+
+| Pen          |  100 |       50.0000 |
+| Notebook     |   50 |       25.0000 |
+| Pencil       |  200 |      100.0000 |
+| Eraser       |  300 |      150.0000 |
+| Marker       |   80 |       40.0000 |
+| Scale        |  150 |       75.0000 |
+| Sharpener    |  120 |       60.0000 |
+| Geometry Box |   40 |       20.0000 |
+| Sketch Pen   |   75 |       37.5000 |
+| Crayons      |   55 |       27.5000 |
++--------------+------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> update products set qty = qty +50 where name = 'pen';
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update products set qty = qty -25 where name = 'pencil';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update products set price = price*1.1 where name = 'scale';
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update products set qty = qty*2 where name = 'sharpener';
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update products set price = price-15 where name = 'crayons';
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from products;
++------+--------------+--------+------+
+| id   | name         | price  | qty  |
++------+--------------+--------+------+
+|    1 | Pen          |  10.00 |  150 |
+|    2 | Notebook     |  25.00 |   50 |
+|    3 | Pencil       |   5.00 |  175 |
+|    4 | Eraser       |   3.00 |  300 |
+|    5 | Marker       |  15.00 |   80 |
+|    6 | Scale        |  22.00 |  150 |
+|    7 | Sharpener    |   8.00 |  240 |
+|    8 | Geometry Box | 120.00 |   40 |
+|    9 | Sketch Pen   |  60.00 |   75 |
+|   10 | Crayons      |  75.00 |   55 |
++------+--------------+--------+------+
+10 rows in set (0.03 sec)
+
+mysql> delete from products where price < 10;
+Query OK, 3 rows affected (0.03 sec)
+
+mysql> delete from products where name = 'marker';
+Query OK, 1 row affected (0.03 sec)
+
+mysql> delete from products where qty > 300;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> delete from products where price > 100;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from products;
++------+------------+-------+------+
+| id   | name       | price | qty  |
++------+------------+-------+------+
+|    1 | Pen        | 10.00 |  150 |
+|    2 | Notebook   | 25.00 |   50 |
+|    6 | Scale      | 22.00 |  150 |
+|    9 | Sketch Pen | 60.00 |   75 |
+|   10 | Crayons    | 75.00 |   55 |
++------+------------+-------+------+
+5 rows in set (0.00 sec)
+
+mysql>

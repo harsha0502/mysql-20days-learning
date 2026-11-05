@@ -1,0 +1,132 @@
+Enter password: ******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 26
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> select * from employees2;
+ERROR 1046 (3D000): No database selected
+mysql> use assignment;
+ERROR 1049 (42000): Unknown database 'assignment'
+mysql> use assignments;
+Database changed
+mysql> select * from employees2;
++--------+--------------+------------+------------+----------+--------------+-----------+
+| emp_id | emp_name     | department | job_role   | salary   | joining_date | city      |
++--------+--------------+------------+------------+----------+--------------+-----------+
+|    101 | Ravi Kumar   | IT         | Developer  | 45000.00 | 2023-01-15   | Vizag     |
+|    102 | Priya Sharma | HR         | HR Manager | 55000.00 | 2022-06-20   | Hyderabad |
+|    103 | Kiran Reddy  | IT         | Tester     | 40000.00 | 2023-03-10   | Vizag     |
+|    104 | Sneha Rao    | Finance    | Accountant | 48000.00 | 2021-11-25   | Chennai   |
+|    105 | Arun Kumar   | IT         | Developer  | 60000.00 | 2020-08-18   | Bangalore |
+|    106 | Divya Reddy  | HR         | Recruiter  | 35000.00 | 2024-01-05   | Vizag     |
+|    107 | Suresh Babu  | Sales      | Executive  | 42000.00 | 2022-09-12   | Hyderabad |
+|    108 | Anjali Devi  | IT         | Developer  | 70000.00 | 2019-05-30   | Chennai   |
+|    109 | Mahesh Kumar | Sales      | Manager    | 65000.00 | 2020-02-14   | Bangalore |
+|    110 | Lakshmi Rao  | Finance    | Analyst    | 52000.00 | 2023-07-22   | Hyderabad |
++--------+--------------+------------+------------+----------+--------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> delete from employees2 where emp_id = 106;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> delete from employees2 where department = 'Finance';
+Query OK, 2 rows affected (0.01 sec)
+
+mysql> delete from employees2 where salary < 40000;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> delete from employees2 where city = 'Vizag';
+Query OK, 2 rows affected (0.01 sec)
+
+mysql> delete from employees2 where emp_name = 'Suresh Babu';
+Query OK, 1 row affected (0.01 sec)
+
+mysql> delete from employees2 where joining_date < '2020-01-01';
+Query OK, 1 row affected (0.01 sec)
+
+mysql> delete from employees2 where job_role ='Recruiter';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> delete from employees2 where job_role ='Sales' and salary < 50000;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from employees2;
++--------+--------------+------------+------------+----------+--------------+-----------+
+| emp_id | emp_name     | department | job_role   | salary   | joining_date | city      |
++--------+--------------+------------+------------+----------+--------------+-----------+
+|    102 | Priya Sharma | HR         | HR Manager | 55000.00 | 2022-06-20   | Hyderabad |
+|    105 | Arun Kumar   | IT         | Developer  | 60000.00 | 2020-08-18   | Bangalore |
+|    109 | Mahesh Kumar | Sales      | Manager    | 65000.00 | 2020-02-14   | Bangalore |
++--------+--------------+------------+------------+----------+--------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT MIN(salary) FROM employee;
+ERROR 1146 (42S02): Table 'assignments.employee' doesn't exist
+mysql> SELECT MIN(salary) FROM employees2;
++-------------+
+| MIN(salary) |
++-------------+
+|    55000.00 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> DELETE FROM employee
+    -> WHERE salary = (SELECT MIN(salary) FROM employee);
+ERROR 1146 (42S02): Table 'assignments.employee' doesn't exist
+mysql> DELETE FROM employee
+    -> delete from employees2 where job_role ='Sales' and salary < 50000;^C
+mysql> DELETE FROM employee2
+    -> where salary = (select min(salary) from employee2);
+ERROR 1146 (42S02): Table 'assignments.employee2' doesn't exist
+mysql> DELETE FROM employees2
+    -> where salary = (select min(salary) from employees2);
+ERROR 1093 (HY000): You can't specify target table 'employees2' for update in FROM clause
+mysql> SELECT MIN(salary)
+    -> FROM (SELECT * FROM employee) AS temp;
+ERROR 1146 (42S02): Table 'assignments.employee' doesn't exist
+mysql> SELECT MIN(salary)
+    -> FROM (SELECT * FROM employees2) AS temp;
++-------------+
+| MIN(salary) |
++-------------+
+|    55000.00 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> DELETE FROM employee
+    -> WHERE salary = (SELECT MIN(salary) FROM (SELECT * FROM employees2) AS temp);
+ERROR 1146 (42S02): Table 'assignments.employee' doesn't exist
+mysql> DELETE FROM employees2
+    -> WHERE salary = (SELECT MIN(salary) FROM (SELECT * FROM employees2) AS temp);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * FROM employees2;
++--------+--------------+------------+-----------+----------+--------------+-----------+
+| emp_id | emp_name     | department | job_role  | salary   | joining_date | city      |
++--------+--------------+------------+-----------+----------+--------------+-----------+
+|    105 | Arun Kumar   | IT         | Developer | 60000.00 | 2020-08-18   | Bangalore |
+|    109 | Mahesh Kumar | Sales      | Manager   | 65000.00 | 2020-02-14   | Bangalore |
++--------+--------------+------------+-----------+----------+--------------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> delete from employees2 where city = 'Chennai';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * FROM employees2;
++--------+--------------+------------+-----------+----------+--------------+-----------+
+| emp_id | emp_name     | department | job_role  | salary   | joining_date | city      |
++--------+--------------+------------+-----------+----------+--------------+-----------+
+|    105 | Arun Kumar   | IT         | Developer | 60000.00 | 2020-08-18   | Bangalore |
+|    109 | Mahesh Kumar | Sales      | Manager   | 65000.00 | 2020-02-14   | Bangalore |
++--------+--------------+------------+-----------+----------+--------------+-----------+
+2 rows in set (0.00 sec)
+
+mysql>

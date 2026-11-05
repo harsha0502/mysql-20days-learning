@@ -1,0 +1,180 @@
+Enter password: ******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use assignments;
+Database changed
+mysql> show tables;
++-----------------------+
+| Tables_in_assignments |
++-----------------------+
+| employees             |
+| employees2            |
+| employees3            |
+| orders                |
+| products              |
+| studentscores         |
++-----------------------+
+6 rows in set (0.04 sec)
+
+mysql> CREATE TABLE Emp (
+    ->  id INT,
+    ->  name VARCHAR(100),
+    ->  dept VARCHAR(20),
+    ->  salary INT
+    ->  );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql>
+mysql>
+mysql> INSERT INTO Emp VALUES
+    ->  (1, 'Rahul', 'IT', 50000),
+    ->  (2, 'Ramesh', 'HR', 35000),
+    ->  (3, 'Karan', 'Finance', 45000),
+    ->  (4, 'Mahesh', 'Marketing', 40000),
+    ->  (5, 'Suresh', 'IT', 55000),
+    ->  (6, 'Arjun', 'Sales', 38000),
+    ->  (7, 'Manish', 'Admin', 42000),
+    ->  (8, 'Ganesh', 'Finance', 47000),
+    ->  (9, 'Naresh', 'HR', 39000),
+    ->  (10, 'Rohan', 'IT', 52000),
+    ->  (11, 'Mohan', 'Sales', 41000),
+    ->  (12, 'Kishan', 'Marketing', 43000),
+    ->  (13, 'Dinesh', 'Admin', 46000),
+    ->  (14, 'Rajesh', 'Finance', 51000),
+    ->  (15, 'Kiran', 'IT', 48000);
+Query OK, 15 rows affected (0.03 sec)
+Records: 15  Duplicates: 0  Warnings: 0
+
+mysql> select * from emp;
++------+--------+-----------+--------+
+| id   | name   | dept      | salary |
++------+--------+-----------+--------+
+|    1 | Rahul  | IT        |  50000 |
+|    2 | Ramesh | HR        |  35000 |
+|    3 | Karan  | Finance   |  45000 |
+|    4 | Mahesh | Marketing |  40000 |
+|    5 | Suresh | IT        |  55000 |
+|    6 | Arjun  | Sales     |  38000 |
+|    7 | Manish | Admin     |  42000 |
+|    8 | Ganesh | Finance   |  47000 |
+|    9 | Naresh | HR        |  39000 |
+|   10 | Rohan  | IT        |  52000 |
+|   11 | Mohan  | Sales     |  41000 |
+|   12 | Kishan | Marketing |  43000 |
+|   13 | Dinesh | Admin     |  46000 |
+|   14 | Rajesh | Finance   |  51000 |
+|   15 | Kiran  | IT        |  48000 |
++------+--------+-----------+--------+
+15 rows in set (0.00 sec)
+
+mysql> select * from emp where dept in = ('sales', 'marketing', 'finance');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '= ('sales', 'marketing', 'finance')' at line 1
+mysql> select * from emp where dept in values = ('sales', 'marketing', 'finance');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'values = ('sales', 'marketing', 'finance')' at line 1
+mysql> select * from emp where dept in ('sales', 'marketing', 'finance');
++------+--------+-----------+--------+
+| id   | name   | dept      | salary |
++------+--------+-----------+--------+
+|    3 | Karan  | Finance   |  45000 |
+|    4 | Mahesh | Marketing |  40000 |
+|    6 | Arjun  | Sales     |  38000 |
+|    8 | Ganesh | Finance   |  47000 |
+|   11 | Mohan  | Sales     |  41000 |
+|   12 | Kishan | Marketing |  43000 |
+|   14 | Rajesh | Finance   |  51000 |
++------+--------+-----------+--------+
+7 rows in set (0.00 sec)
+
+mysql> select * from emp where dept in ('admin');
++------+--------+-------+--------+
+| id   | name   | dept  | salary |
++------+--------+-------+--------+
+|    7 | Manish | Admin |  42000 |
+|   13 | Dinesh | Admin |  46000 |
++------+--------+-------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from emp where salary in (39000, 43000, 52000);
++------+--------+-----------+--------+
+| id   | name   | dept      | salary |
++------+--------+-----------+--------+
+|    9 | Naresh | HR        |  39000 |
+|   10 | Rohan  | IT        |  52000 |
+|   12 | Kishan | Marketing |  43000 |
++------+--------+-----------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from emp where dept in ('sales', 'admin', 'it');
++------+--------+-------+--------+
+| id   | name   | dept  | salary |
++------+--------+-------+--------+
+|    1 | Rahul  | IT    |  50000 |
+|    5 | Suresh | IT    |  55000 |
+|    6 | Arjun  | Sales |  38000 |
+|    7 | Manish | Admin |  42000 |
+|   10 | Rohan  | IT    |  52000 |
+|   11 | Mohan  | Sales |  41000 |
+|   13 | Dinesh | Admin |  46000 |
+|   15 | Kiran  | IT    |  48000 |
++------+--------+-------+--------+
+8 rows in set (0.00 sec)
+
+mysql> select * from emp where salary in (40000, 45000, 50000);
++------+--------+-----------+--------+
+| id   | name   | dept      | salary |
++------+--------+-----------+--------+
+|    1 | Rahul  | IT        |  50000 |
+|    3 | Karan  | Finance   |  45000 |
+|    4 | Mahesh | Marketing |  40000 |
++------+--------+-----------+--------+
+3 rows in set (0.00 sec)
+
+mysql> update emp set salary = salary + 2500 where salary in (45000, 48000, 52000);
+Query OK, 3 rows affected (0.01 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> update emp set salary = salary + 4000 where dept in ('admin');
+Query OK, 2 rows affected (0.00 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> update emp set salary = salary + 4000 where dept in ('marketing', 'finance');
+Query OK, 5 rows affected (0.01 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> update emp set salary = salary + 500 where salary in (40000, 41000, 42000);
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update emp set salary = salary + 2000 where dept in ('it', 'sales', 'admin');
+Query OK, 8 rows affected (0.01 sec)
+Rows matched: 8  Changed: 8  Warnings: 0
+
+mysql> delete from emp where salary in (45000, 50000, 55000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> delete from emp where dept in ('marketing', 'hr');
+Query OK, 4 rows affected (0.01 sec)
+
+mysql> delete from emp where dept in ('admin');
+Query OK, 2 rows affected (0.01 sec)
+
+mysql> delete from emp where salary in (37000, 38000, 41000);
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> delete from emp where dept in ('it','finance', 'sales');
+Query OK, 8 rows affected (0.00 sec)
+
+mysql> select * from emp;
+Empty set (0.00 sec)
+
+mysql>

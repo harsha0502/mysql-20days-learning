@@ -1,0 +1,207 @@
+Enter password: ******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 27
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> select * from employees3;
+ERROR 1046 (3D000): No database selected
+mysql> use assignments;
+Database changed
+mysql> select * from employees3;
++--------+--------------+------------+------------+----------+--------------+-----------+
+| emp_id | emp_name     | department | job_role   | salary   | joining_date | city      |
++--------+--------------+------------+------------+----------+--------------+-----------+
+|    101 | Ravi Kumar   | IT         | Developer  | 45000.00 | 2023-01-15   | Vizag     |
+|    102 | Priya Sharma | HR         | HR Manager | 55000.00 | 2022-06-20   | Hyderabad |
+|    103 | Kiran Reddy  | IT         | Tester     | 40000.00 | 2023-03-10   | Vizag     |
+|    104 | Sneha Rao    | Finance    | Accountant | 48000.00 | 2021-11-25   | Chennai   |
+|    105 | Arun Kumar   | IT         | Developer  | 60000.00 | 2020-08-18   | Bangalore |
+|    106 | Divya Reddy  | HR         | Recruiter  | 35000.00 | 2024-01-05   | Vizag     |
+|    107 | Suresh Babu  | Sales      | Executive  | 42000.00 | 2022-09-12   | Hyderabad |
+|    108 | Anjali Devi  | IT         | Developer  | 70000.00 | 2019-05-30   | Chennai   |
+|    109 | Mahesh Kumar | Sales      | Manager    | 65000.00 | 2020-02-14   | Bangalore |
+|    110 | Lakshmi Rao  | Finance    | Analyst    | 52000.00 | 2023-07-22   | Hyderabad |
++--------+--------------+------------+------------+----------+--------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select * from employees where department = 'IT';
++--------+-------------+------------+------------------+----------+--------------+-----------+
+| emp_id | emp_name    | department | job_role         | salary   | joining_date | city      |
++--------+-------------+------------+------------------+----------+--------------+-----------+
+|    101 | Ravi Kumar  | IT         | Developer        | 60000.00 | 2023-01-15   | Hyderabad |
+|    103 | Kiran Reddy | IT         | Senior Tester    | 49000.00 | 2023-03-10   | Hyderabad |
+|    108 | Anjali Devi | IT         | Senior Developer | 82000.00 | 2019-05-30   | Chennai   |
++--------+-------------+------------+------------------+----------+--------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employees3 where department = 'IT';
++--------+-------------+------------+-----------+----------+--------------+-----------+
+| emp_id | emp_name    | department | job_role  | salary   | joining_date | city      |
++--------+-------------+------------+-----------+----------+--------------+-----------+
+|    101 | Ravi Kumar  | IT         | Developer | 45000.00 | 2023-01-15   | Vizag     |
+|    103 | Kiran Reddy | IT         | Tester    | 40000.00 | 2023-03-10   | Vizag     |
+|    105 | Arun Kumar  | IT         | Developer | 60000.00 | 2020-08-18   | Bangalore |
+|    108 | Anjali Devi | IT         | Developer | 70000.00 | 2019-05-30   | Chennai   |
++--------+-------------+------------+-----------+----------+--------------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> select * from employees3 where salary > 50000;
++--------+--------------+------------+------------+----------+--------------+-----------+
+| emp_id | emp_name     | department | job_role   | salary   | joining_date | city      |
++--------+--------------+------------+------------+----------+--------------+-----------+
+|    102 | Priya Sharma | HR         | HR Manager | 55000.00 | 2022-06-20   | Hyderabad |
+|    105 | Arun Kumar   | IT         | Developer  | 60000.00 | 2020-08-18   | Bangalore |
+|    108 | Anjali Devi  | IT         | Developer  | 70000.00 | 2019-05-30   | Chennai   |
+|    109 | Mahesh Kumar | Sales      | Manager    | 65000.00 | 2020-02-14   | Bangalore |
+|    110 | Lakshmi Rao  | Finance    | Analyst    | 52000.00 | 2023-07-22   | Hyderabad |
++--------+--------------+------------+------------+----------+--------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select emp_name salary from employees3;
++--------------+
+| salary       |
++--------------+
+| Ravi Kumar   |
+| Priya Sharma |
+| Kiran Reddy  |
+| Sneha Rao    |
+| Arun Kumar   |
+| Divya Reddy  |
+| Suresh Babu  |
+| Anjali Devi  |
+| Mahesh Kumar |
+| Lakshmi Rao  |
++--------------+
+10 rows in set (0.00 sec)
+
+mysql> select emp_name, salary from employees3;
++--------------+----------+
+| emp_name     | salary   |
++--------------+----------+
+| Ravi Kumar   | 45000.00 |
+| Priya Sharma | 55000.00 |
+| Kiran Reddy  | 40000.00 |
+| Sneha Rao    | 48000.00 |
+| Arun Kumar   | 60000.00 |
+| Divya Reddy  | 35000.00 |
+| Suresh Babu  | 42000.00 |
+| Anjali Devi  | 70000.00 |
+| Mahesh Kumar | 65000.00 |
+| Lakshmi Rao  | 52000.00 |
++--------------+----------+
+10 rows in set (0.00 sec)
+
+mysql> select * from employees where city = 'Vizag';
+Empty set (0.00 sec)
+
+mysql> select * from employees3 where city = 'Vizag';
++--------+-------------+------------+-----------+----------+--------------+-------+
+| emp_id | emp_name    | department | job_role  | salary   | joining_date | city  |
++--------+-------------+------------+-----------+----------+--------------+-------+
+|    101 | Ravi Kumar  | IT         | Developer | 45000.00 | 2023-01-15   | Vizag |
+|    103 | Kiran Reddy | IT         | Tester    | 40000.00 | 2023-03-10   | Vizag |
+|    106 | Divya Reddy | HR         | Recruiter | 35000.00 | 2024-01-05   | Vizag |
++--------+-------------+------------+-----------+----------+--------------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employees3 where joining_date = '2022-01-01';
+Empty set (0.00 sec)
+
+mysql> select * from employees3 where joining_date > '2022-01-01';
++--------+--------------+------------+------------+----------+--------------+-----------+
+| emp_id | emp_name     | department | job_role   | salary   | joining_date | city      |
++--------+--------------+------------+------------+----------+--------------+-----------+
+|    101 | Ravi Kumar   | IT         | Developer  | 45000.00 | 2023-01-15   | Vizag     |
+|    102 | Priya Sharma | HR         | HR Manager | 55000.00 | 2022-06-20   | Hyderabad |
+|    103 | Kiran Reddy  | IT         | Tester     | 40000.00 | 2023-03-10   | Vizag     |
+|    106 | Divya Reddy  | HR         | Recruiter  | 35000.00 | 2024-01-05   | Vizag     |
+|    107 | Suresh Babu  | Sales      | Executive  | 42000.00 | 2022-09-12   | Hyderabad |
+|    110 | Lakshmi Rao  | Finance    | Analyst    | 52000.00 | 2023-07-22   | Hyderabad |
++--------+--------------+------------+------------+----------+--------------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> select * from employees3 where salary<60000 and salary>40000;
++--------+--------------+------------+------------+----------+--------------+-----------+
+| emp_id | emp_name     | department | job_role   | salary   | joining_date | city      |
++--------+--------------+------------+------------+----------+--------------+-----------+
+|    101 | Ravi Kumar   | IT         | Developer  | 45000.00 | 2023-01-15   | Vizag     |
+|    102 | Priya Sharma | HR         | HR Manager | 55000.00 | 2022-06-20   | Hyderabad |
+|    104 | Sneha Rao    | Finance    | Accountant | 48000.00 | 2021-11-25   | Chennai   |
+|    107 | Suresh Babu  | Sales      | Executive  | 42000.00 | 2022-09-12   | Hyderabad |
+|    110 | Lakshmi Rao  | Finance    | Analyst    | 52000.00 | 2023-07-22   | Hyderabad |
++--------+--------------+------------+------------+----------+--------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from employees3 where emp_name like '%Kumar';
++--------+--------------+------------+-----------+----------+--------------+-----------+
+| emp_id | emp_name     | department | job_role  | salary   | joining_date | city      |
++--------+--------------+------------+-----------+----------+--------------+-----------+
+|    101 | Ravi Kumar   | IT         | Developer | 45000.00 | 2023-01-15   | Vizag     |
+|    105 | Arun Kumar   | IT         | Developer | 60000.00 | 2020-08-18   | Bangalore |
+|    109 | Mahesh Kumar | Sales      | Manager   | 65000.00 | 2020-02-14   | Bangalore |
++--------+--------------+------------+-----------+----------+--------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employees3 order by salary desc;
++--------+--------------+------------+------------+----------+--------------+-----------+
+| emp_id | emp_name     | department | job_role   | salary   | joining_date | city      |
++--------+--------------+------------+------------+----------+--------------+-----------+
+|    108 | Anjali Devi  | IT         | Developer  | 70000.00 | 2019-05-30   | Chennai   |
+|    109 | Mahesh Kumar | Sales      | Manager    | 65000.00 | 2020-02-14   | Bangalore |
+|    105 | Arun Kumar   | IT         | Developer  | 60000.00 | 2020-08-18   | Bangalore |
+|    102 | Priya Sharma | HR         | HR Manager | 55000.00 | 2022-06-20   | Hyderabad |
+|    110 | Lakshmi Rao  | Finance    | Analyst    | 52000.00 | 2023-07-22   | Hyderabad |
+|    104 | Sneha Rao    | Finance    | Accountant | 48000.00 | 2021-11-25   | Chennai   |
+|    101 | Ravi Kumar   | IT         | Developer  | 45000.00 | 2023-01-15   | Vizag     |
+|    107 | Suresh Babu  | Sales      | Executive  | 42000.00 | 2022-09-12   | Hyderabad |
+|    103 | Kiran Reddy  | IT         | Tester     | 40000.00 | 2023-03-10   | Vizag     |
+|    106 | Divya Reddy  | HR         | Recruiter  | 35000.00 | 2024-01-05   | Vizag     |
++--------+--------------+------------+------------+----------+--------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select max(salary) from (select * from employees3) as temp;
++-------------+
+| max(salary) |
++-------------+
+|    70000.00 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from (select * from employees3) as temp;
++--------+--------------+------------+------------+----------+--------------+-----------+
+| emp_id | emp_name     | department | job_role   | salary   | joining_date | city      |
++--------+--------------+------------+------------+----------+--------------+-----------+
+|    101 | Ravi Kumar   | IT         | Developer  | 45000.00 | 2023-01-15   | Vizag     |
+|    102 | Priya Sharma | HR         | HR Manager | 55000.00 | 2022-06-20   | Hyderabad |
+|    103 | Kiran Reddy  | IT         | Tester     | 40000.00 | 2023-03-10   | Vizag     |
+|    104 | Sneha Rao    | Finance    | Accountant | 48000.00 | 2021-11-25   | Chennai   |
+|    105 | Arun Kumar   | IT         | Developer  | 60000.00 | 2020-08-18   | Bangalore |
+|    106 | Divya Reddy  | HR         | Recruiter  | 35000.00 | 2024-01-05   | Vizag     |
+|    107 | Suresh Babu  | Sales      | Executive  | 42000.00 | 2022-09-12   | Hyderabad |
+|    108 | Anjali Devi  | IT         | Developer  | 70000.00 | 2019-05-30   | Chennai   |
+|    109 | Mahesh Kumar | Sales      | Manager    | 65000.00 | 2020-02-14   | Bangalore |
+|    110 | Lakshmi Rao  | Finance    | Analyst    | 52000.00 | 2023-07-22   | Hyderabad |
++--------+--------------+------------+------------+----------+--------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select * max(salary) from (select * from employees3) as temp;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'max(salary) from (select * from employees3) as temp' at line 1
+mysql> select * from employees3 where salary = (select max(salary) from employees3;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select * from employees3 where salary = (select max(salary) from employees3);
++--------+-------------+------------+-----------+----------+--------------+---------+
+| emp_id | emp_name    | department | job_role  | salary   | joining_date | city    |
++--------+-------------+------------+-----------+----------+--------------+---------+
+|    108 | Anjali Devi | IT         | Developer | 70000.00 | 2019-05-30   | Chennai |
++--------+-------------+------------+-----------+----------+--------------+---------+
+1 row in set (0.00 sec)
+
+mysql>
